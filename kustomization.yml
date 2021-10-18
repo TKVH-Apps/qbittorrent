@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: qbittorrent
+resources:
+  - qbittorrent-deploy.yml
+  - qbittorrent-svc.yml
+  - qbittorrent-pvc.yml
+  - qbittorrent-sa.yml
+  - qbittorrent-spc.yml
+  - qbittorrent-ing.yml

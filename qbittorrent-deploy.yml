@@ -1,0 +1,96 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: qbittorrent
+  labels:
+    app: qbittorrent
+    part-of: qbittorrent
+  annotations:
+    keel.sh/policy: force
+    keel.sh/trigger: poll
+    keel.sh/pollSchedule: "@hourly"
+    keel.sh/match-tag: true
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+      part-of: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+        part-of: qbittorrent
+    spec:
+      serviceAccountName: qbittorrent
+      containers:
+      - name: qbittorrent
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        image: dyonr/qbittorrentvpn:latest
+        ports:
+        - name: qbittorrent
+          containerPort: 8080
+        env:
+        - name: NAME_SERVERS
+          value: "1.1.1.1,1.0.0.1"
+        - name: VPN_ENABLED
+          value: "yes"
+        - name: VPN_TYPE
+          value: "openvpn"
+        - name: VPN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: qbittorrent
+              key: VPN_USERNAME
+        - name: VPN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: qbittorrent
+              key: VPN_PASSWORD
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: UMASK
+          value: "022"
+        - name: LAN_NETWORK
+          valueFrom:
+            secretKeyRef:
+              name: qbittorrent
+              key: LAN_NETWORK
+        - name: WEBUI_PORT
+          value: "8080"
+        volumeMounts:
+        - name: qbittorrent
+          mountPath: /config
+        - name: downloads-movies
+          mountPath: /downloads/movies
+        - name: downloads-series
+          mountPath: /downloads/series
+        - name: qbittorrent-secrets
+          mountPath: "/mnt/vault"
+          readOnly: true
+        - mountPath: /dev/net/tun
+          name: dev-net-tun
+      volumes:
+      - name: qbittorrent
+        persistentVolumeClaim:
+          claimName: qbittorrent
+      - name: downloads-series
+        persistentVolumeClaim:
+          claimName: downloads-series
+      - name: downloads-movies
+        persistentVolumeClaim:
+          claimName: downloads-movies
+      - name: qbittorrent-secrets
+        csi:
+          driver: "secrets-store.csi.k8s.io"
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "qbittorrent"
+      - name: dev-net-tun
+        hostPath:
+          path: /dev/net/tun
