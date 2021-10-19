@@ -75,6 +75,11 @@ spec:
           readOnly: true
         - mountPath: /dev/net/tun
           name: dev-net-tun
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 128Mi
         readinessProbe:
           tcpSocket:
             port: qbittorrent
