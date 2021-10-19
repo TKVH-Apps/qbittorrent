@@ -77,12 +77,12 @@ spec:
           name: dev-net-tun
         readinessProbe:
           tcpSocket:
-            port: 8080
+            port: qbittorrent
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           tcpSocket:
-            port: 8080
+            port: qbittorrent
           initialDelaySeconds: 15
           periodSeconds: 20
       volumes:
