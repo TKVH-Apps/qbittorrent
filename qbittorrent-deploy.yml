@@ -35,7 +35,7 @@ spec:
           containerPort: 8080
         env:
         - name: NAME_SERVERS
-          value: "1.1.1.1,1.0.0.1"
+          value: "208.67.222.222,208.67.220.220"
         - name: VPN_ENABLED
           value: "yes"
         - name: VPN_TYPE
