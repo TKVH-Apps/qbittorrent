@@ -77,7 +77,7 @@ spec:
           name: dev-net-tun
         resources:
           limits:
-            memory: 256Mi
+            memory: 512Mi
           requests:
             memory: 128Mi
         readinessProbe:
