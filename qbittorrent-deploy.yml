@@ -39,7 +39,7 @@ spec:
         - name: VPN_ENABLED
           value: "yes"
         - name: VPN_TYPE
-          value: "openvpn"
+          value: "wireguard"
         - name: VPN_USERNAME
           valueFrom:
             secretKeyRef:
