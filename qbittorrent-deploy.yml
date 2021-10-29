@@ -79,7 +79,7 @@ spec:
           limits:
             memory: 512Mi
           requests:
-            memory: 128Mi
+            memory: 256Mi
         readinessProbe:
           tcpSocket:
             port: qbittorrent
