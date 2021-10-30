@@ -29,7 +29,7 @@ spec:
           capabilities:
             add:
               - NET_ADMIN
-          #privileged: true
+          privileged: true
         image: dyonr/qbittorrentvpn:latest
         ports:
         - name: qbittorrent
