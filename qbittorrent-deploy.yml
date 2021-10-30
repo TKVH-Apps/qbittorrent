@@ -35,8 +35,6 @@ spec:
         - name: qbittorrent
           containerPort: 8080
         env:
-#        - name: LEGACY_IPTABLES
-#          value: "true"
         - name: NAME_SERVERS
           value: "1.1.1.1,1.0.0.1"
         - name: VPN_ENABLED
