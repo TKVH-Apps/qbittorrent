@@ -29,14 +29,14 @@ spec:
           capabilities:
             add:
               - NET_ADMIN
-          privileged: true
+          #privileged: true
         image: dyonr/qbittorrentvpn:latest
         ports:
         - name: qbittorrent
           containerPort: 8080
         env:
-        - name: LEGACY_IPTABLES
-          value: "true"
+#        - name: LEGACY_IPTABLES
+#          value: "true"
         - name: NAME_SERVERS
           value: "1.1.1.1,1.0.0.1"
         - name: VPN_ENABLED
@@ -81,6 +81,7 @@ spec:
         resources:
           limits:
             memory: 512Mi
+            cpu: 200m
           requests:
             memory: 256Mi
         readinessProbe:
