@@ -10,3 +10,14 @@ spec:
   ports:
     - port: 8080
       targetPort: qbittorrent
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ak-outpost-proxy01
+spec:
+  type: ExternalName
+  externalName: ak-outpost-proxy01.authentik.svc.cluster.local
+  ports:
+  - port: 9000
+    targetPort: 9000
