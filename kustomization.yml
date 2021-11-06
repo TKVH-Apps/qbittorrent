@@ -8,3 +8,4 @@ resources:
   - qbittorrent-sa.yml
   - qbittorrent-spc.yml
   - qbittorrent-ing.yml
+  - qbittorrent-ns.yml
