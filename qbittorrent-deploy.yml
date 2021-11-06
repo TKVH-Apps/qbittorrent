@@ -78,10 +78,10 @@ spec:
           name: dev-net-tun
         resources:
           limits:
-            memory: 512Mi
+            memory: 256Mi
             cpu: 300m
           requests:
-            memory: 256Mi
+            memory: 128Mi
         readinessProbe:
           tcpSocket:
             port: qbittorrent
