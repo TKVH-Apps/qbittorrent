@@ -81,7 +81,7 @@ spec:
             memory: 512Mi
             cpu: 500m
           requests:
-            memory: 128Mi
+            memory: 300Mi
         readinessProbe:
           tcpSocket:
             port: qbittorrent
