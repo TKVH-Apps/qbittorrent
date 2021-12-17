@@ -23,6 +23,16 @@ spec:
         part-of: qbittorrent
     spec:
       serviceAccountName: qbittorrent
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                - ssd
       containers:
       - name: qbittorrent
         securityContext:
