@@ -40,7 +40,7 @@ spec:
             add:
               - NET_ADMIN
           privileged: true
-        image: dyonr/qbittorrentvpn:v4_2_x
+        image: dyonr/qbittorrentvpn:latest
         ports:
         - name: qbittorrent
           containerPort: 8080
@@ -74,6 +74,8 @@ spec:
               key: LAN_NETWORK
         - name: WEBUI_PORT
           value: "8080"
+        - name: RESTART_CONTAINER
+          value: "no"
         volumeMounts:
         - name: qbittorrent
           mountPath: /config
