@@ -40,7 +40,7 @@ spec:
             add:
               - NET_ADMIN
           privileged: true
-        image: dyonr/qbittorrentvpn:latest
+        image: lscr.io/linuxserver/qbittorrent:4.4.2
         ports:
         - name: qbittorrent
           containerPort: 8080
