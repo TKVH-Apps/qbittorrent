@@ -46,9 +46,9 @@ spec:
           containerPort: 8080
         env:
         - name: NAME_SERVERS
-          value: "8.8.8.8,8.8.4.4"
+          value: "1.1.1.1,1.1.0.0"
         - name: VPN_ENABLED
-          value: "yes"
+          value: "false"
         - name: VPN_TYPE
           value: "wireguard"
         - name: VPN_USERNAME
