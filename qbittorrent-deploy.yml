@@ -93,16 +93,6 @@ spec:
             memory: 250Mi
           requests:
             memory: 200Mi
-        readinessProbe:
-          tcpSocket:
-            port: qbittorrent
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        livenessProbe:
-          tcpSocket:
-            port: qbittorrent
-          initialDelaySeconds: 15
-          periodSeconds: 20
       volumes:
       - name: qbittorrent
         persistentVolumeClaim:
