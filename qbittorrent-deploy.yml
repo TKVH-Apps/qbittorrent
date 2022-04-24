@@ -81,6 +81,8 @@ spec:
           mountPath: /config
         - name: downloads-movies
           mountPath: /downloads/movies
+        - name: downloads-movies4k
+          mountPath: /downloads/movies4k
         - name: downloads-series
           mountPath: /downloads/series
         - name: qbittorrent-secrets
@@ -103,6 +105,9 @@ spec:
       - name: downloads-movies
         persistentVolumeClaim:
           claimName: downloads-movies
+      - name: downloads-movies4k
+        persistentVolumeClaim:
+          claimName: downloads-movies4k
       - name: qbittorrent-secrets
         csi:
           driver: "secrets-store.csi.k8s.io"
