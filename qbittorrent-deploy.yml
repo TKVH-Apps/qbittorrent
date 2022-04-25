@@ -5,11 +5,6 @@ metadata:
   labels:
     app: qbittorrent
     part-of: qbittorrent
-  annotations:
-    keel.sh/policy: force
-    keel.sh/trigger: poll
-    keel.sh/pollSchedule: "@hourly"
-    keel.sh/match-tag: true
 spec:
   replicas: 1
   selector:
@@ -22,7 +17,6 @@ spec:
         app: qbittorrent
         part-of: qbittorrent
     spec:
-      serviceAccountName: qbittorrent
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -35,61 +29,26 @@ spec:
                 - ssd
       containers:
       - name: qbittorrent
-        securityContext:
-          capabilities:
-            add:
-              - NET_ADMIN
-          privileged: true
         image: lscr.io/linuxserver/qbittorrent:4.4.2
         ports:
         - name: qbittorrent
           containerPort: 8080
         env:
-        - name: NAME_SERVERS
-          value: "1.1.1.1,1.1.0.0"
-        - name: VPN_ENABLED
-          value: "false"
-        - name: VPN_TYPE
-          value: "wireguard"
-        - name: VPN_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: qbittorrent
-              key: VPN_USERNAME
-        - name: VPN_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: qbittorrent
-              key: VPN_PASSWORD
         - name: PUID
           value: "1000"
         - name: PGID
           value: "1000"
         - name: UMASK
           value: "022"
-        - name: LAN_NETWORK
-          valueFrom:
-            secretKeyRef:
-              name: qbittorrent
-              key: LAN_NETWORK
-        - name: WEBUI_PORT
-          value: "8080"
-        - name: RESTART_CONTAINER
-          value: "no"
         volumeMounts:
         - name: qbittorrent
           mountPath: /config
         - name: downloads-movies
           mountPath: /downloads/movies
-        - name: downloads-movies4k
-          mountPath: /downloads/movies4k
+ #       - name: downloads-movies4k
+ #         mountPath: /downloads/movies4k
         - name: downloads-series
           mountPath: /downloads/series
-        - name: qbittorrent-secrets
-          mountPath: "/mnt/vault"
-          readOnly: true
-        - mountPath: /dev/net/tun
-          name: dev-net-tun
         resources:
           limits:
             memory: 250Mi
@@ -105,15 +64,6 @@ spec:
       - name: downloads-movies
         persistentVolumeClaim:
           claimName: downloads-movies
-      - name: downloads-movies4k
-        persistentVolumeClaim:
-          claimName: downloads-movies4k
-      - name: qbittorrent-secrets
-        csi:
-          driver: "secrets-store.csi.k8s.io"
-          readOnly: true
-          volumeAttributes:
-            secretProviderClass: "qbittorrent"
-      - name: dev-net-tun
-        hostPath:
-          path: /dev/net/tun
+#      - name: downloads-movies4k
+#        persistentVolumeClaim:
+#          claimName: downloads-movies4k
