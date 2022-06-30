@@ -29,7 +29,7 @@ spec:
                 - ssd
       containers:
       - name: qbittorrent
-        image: lscr.io/linuxserver/qbittorrent:4.4.2
+        image: lscr.io/linuxserver/qbittorrent:4.4.3
         ports:
         - name: qbittorrent
           containerPort: 8080
